@@ -46,8 +46,8 @@ public class ListController {
 
         // add context menu to each item in list
         listView.setCellFactory(lv -> {
-            MenuItem editItem = new MenuItem("Edit");
-            MenuItem deleteItem = new MenuItem("Delete");
+            MenuItem editItem = new MenuItem("Edytuj");
+            MenuItem deleteItem = new MenuItem("Usuń");
             editItem.setOnAction(event -> editDialog(listView.getSelectionModel().getSelectedItem()));
             deleteItem.setOnAction(event -> deleteDialog(listView.getSelectionModel().getSelectedItem()));
             ContextMenu contextMenu = new ContextMenu(editItem, deleteItem);
@@ -98,6 +98,7 @@ public class ListController {
         Dialog<ButtonType> dialog  = new Dialog();
         dialog.setTitle("Edycja notatki");
         dialog.initOwner(mainBorderPane.getScene().getWindow());
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("itemDialog.fxml"));
 
         try {
@@ -107,8 +108,8 @@ public class ListController {
         }
         ItemController itemController = fxmlLoader.getController();
         itemController.setFields(itemListView.getSelectionModel().getSelectedItem());
+        dialog.getDialogPane().lookupButton(ButtonType.OK).disableProperty().bind(itemController.emptyInput());
 
-        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
         Optional<ButtonType> response = dialog.showAndWait();
 
         if(response.isPresent() && response.get() == ButtonType.OK){
@@ -124,19 +125,21 @@ public class ListController {
         Dialog<ButtonType> dialog  = new Dialog();
         dialog.setTitle("Nowa notatka");
         dialog.initOwner(mainBorderPane.getScene().getWindow());
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("itemDialog.fxml"));
 
         try {
             dialog.getDialogPane().setContent(fxmlLoader.load());
         } catch (IOException e){
+            System.out.println("couldn't load the dialog");
             e.fillInStackTrace();
+            return;
         }
         ItemController itemController = fxmlLoader.getController();
-        itemController.setFields(new Item(null, null, dayComboBox.getValue()));
+        itemController.setFields(new Item("", "", dayComboBox.getValue()));
+        dialog.getDialogPane().lookupButton(ButtonType.OK).disableProperty().bind(itemController.emptyInput());
 
-        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
         Optional<ButtonType> response = dialog.showAndWait();
-
         if(response.isPresent() && response.get() == ButtonType.OK){
           Item item = itemController.createItem();
           dayComboBox.getSelectionModel().select(item.getDay());
