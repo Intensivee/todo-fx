@@ -6,7 +6,7 @@
             fx:controller="org.example.controller.ListController">
     <left>
         <GridPane hgap="1">
-            <Button text="Nowa notatka" GridPane.rowIndex="0" GridPane.columnIndex="0" onAction="#createDialog"/>
+            <Button fx:id="addItemButton" text="Nowa notatka" GridPane.rowIndex="0" GridPane.columnIndex="0" onAction="#createDialog"/>
             <ComboBox fx:id="dayComboBox" GridPane.rowIndex="0" GridPane.columnIndex="1" onAction="#dayChangeEventHandler"/>
             <ListView fx:id="itemListView" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
         </GridPane>

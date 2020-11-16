@@ -30,14 +30,14 @@ public class ItemController {
     public void setTextLimiter(){
 
         headingTextField.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            if(newValue != null && headingTextField.getText().length() > Constants.ITEAM_HEADING_LENGTH) {
-                headingTextField.setText(headingTextField.getText().substring(0, Constants.ITEAM_HEADING_LENGTH));
+            if(newValue != null && headingTextField.getText().length() > Constants.ITEM_HEADING_LENGTH) {
+                headingTextField.setText(headingTextField.getText().substring(0, Constants.ITEM_HEADING_LENGTH));
             }
         });
 
         noteTextArea.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            if(newValue != null && noteTextArea.getText().length() > Constants.ITEAM_NOTE_LENGTH) {
-                noteTextArea.setText(noteTextArea.getText().substring(0, Constants.ITEAM_NOTE_LENGTH));
+            if(newValue != null && noteTextArea.getText().length() > Constants.ITEM_NOTE_LENGTH) {
+                noteTextArea.setText(noteTextArea.getText().substring(0, Constants.ITEM_NOTE_LENGTH));
             }
         });
     }

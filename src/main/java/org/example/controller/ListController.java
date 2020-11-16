@@ -8,6 +8,7 @@ import javafx.scene.layout.BorderPane;
 import org.example.App;
 import org.example.dao.ItemDao;
 import org.example.model.Item;
+import org.example.util.Constants;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -16,6 +17,8 @@ public class ListController {
 
     @FXML
     private BorderPane mainBorderPane;
+    @FXML
+    private Button addItemButton;
     @FXML
     private ListView<Item> itemListView;
     @FXML
@@ -29,6 +32,7 @@ public class ListController {
         dayComboBox.setItems(FXCollections.observableArrayList(Item.Day.MONDAY,Item.Day.TUESDAY, Item.Day.WEDNESDAY,
                 Item.Day.THURSDAY, Item.Day.FRIDAY, Item.Day.SATURDAY, Item.Day.SUNDAY));
         dayComboBox.getSelectionModel().select(Item.Day.MONDAY);
+        this.dayChangeEventHandler();
     }
 
 
@@ -73,12 +77,13 @@ public class ListController {
             });
             return cell;
         });
-        listView.setItems(ItemDao.getInstance().getItems());
     }
 
     public void dayChangeEventHandler(){
         Item.Day selectedDay = dayComboBox.getSelectionModel().getSelectedItem();
         itemListView.setItems(ItemDao.getInstance().getItems(selectedDay));
+        boolean isLimit = itemListView.getItems().stream().count() == Constants.MAX_DAY_NOTES;
+        addItemButton.setDisable(isLimit);
     }
 
     @FXML
@@ -88,8 +93,10 @@ public class ListController {
         alert.setHeaderText(null);
         alert.setContentText("Czy napewno chcesz usunąć: " + item.getHeading() + "?");
         Optional<ButtonType> action = alert.showAndWait();
+        System.out.println(item);
         if(action.isPresent() && action.get() == ButtonType.OK){
             ItemDao.getInstance().deleteItem(item);
+            this.dayChangeEventHandler();
         }
     }
 
@@ -115,6 +122,7 @@ public class ListController {
         if(response.isPresent() && response.get() == ButtonType.OK){
             Item editedItem = itemController.editItem();
             dayComboBox.getSelectionModel().select(editedItem.getDay());
+            this.dayChangeEventHandler();
             itemListView.refresh();
             itemListView.getSelectionModel().select(editedItem);
         }
@@ -143,7 +151,9 @@ public class ListController {
         if(response.isPresent() && response.get() == ButtonType.OK){
           Item item = itemController.createItem();
           dayComboBox.getSelectionModel().select(item.getDay());
+          this.dayChangeEventHandler();
           itemListView.getSelectionModel().select(item);
+
         }
     }
 

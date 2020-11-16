@@ -16,6 +16,16 @@ public class ItemDao {
                 new Item("alo", "xxxxxxxxxxxxxxxxxxxxx", Item.Day.MONDAY),
                 new Item("olo", "asdsdax", Item.Day.FRIDAY),
                 new Item("kolo", "yyyyyyyyyyyyy", Item.Day.SATURDAY),
+                new Item("dsaas", "aaaaaaaaaaaaaa", Item.Day.SUNDAY),
+                new Item("halo", "sagsagasagsags", Item.Day.MONDAY),
+                new Item("alo", "xxxxxxxxxxxxxxxxxxxxx", Item.Day.MONDAY),
+                new Item("olo", "asdsdax", Item.Day.FRIDAY),
+                new Item("kolo", "yyyyyyyyyyyyy", Item.Day.SATURDAY),
+                new Item("dsaas", "aaaaaaaaaaaaaa", Item.Day.SUNDAY),
+                new Item("halo", "sagsagasagsags", Item.Day.MONDAY),
+                new Item("alo", "xxxxxxxxxxxxxxxxxxxxx", Item.Day.MONDAY),
+                new Item("olo", "asdsdax", Item.Day.FRIDAY),
+                new Item("kolo", "yyyyyyyyyyyyy", Item.Day.SATURDAY),
                 new Item("dsaas", "aaaaaaaaaaaaaa", Item.Day.SUNDAY)
         ));
     }
