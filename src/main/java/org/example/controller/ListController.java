@@ -82,6 +82,8 @@ public class ListController {
     public void dayChangeEventHandler(){
         Item.Day selectedDay = dayComboBox.getSelectionModel().getSelectedItem();
         itemListView.setItems(ItemDao.getInstance().getItems(selectedDay));
+        itemTextArea.setText("");
+        itemListView.getSelectionModel().select(null);
         boolean isLimit = itemListView.getItems().stream().count() == Constants.MAX_DAY_NOTES;
         addItemButton.setDisable(isLimit);
     }
@@ -153,7 +155,6 @@ public class ListController {
           dayComboBox.getSelectionModel().select(item.getDay());
           this.dayChangeEventHandler();
           itemListView.getSelectionModel().select(item);
-
         }
     }
 
