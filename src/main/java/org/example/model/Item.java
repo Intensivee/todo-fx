@@ -27,6 +27,9 @@ public class Item {
         }
     }
 
+    public Item() {
+    }
+
     public Item(String heading, String note, Day day) {
         this.heading = heading;
         this.note = note;

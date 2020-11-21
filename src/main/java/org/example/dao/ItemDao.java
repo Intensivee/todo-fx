@@ -3,31 +3,31 @@ package org.example.dao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.example.model.Item;
-
-import java.util.Arrays;
+import org.example.util.XmlParser;
 
 public class ItemDao {
     private static final ItemDao instance = new ItemDao();
     private static ObservableList<Item> items;
 
     static {
-        items = FXCollections.observableArrayList(Arrays.asList(
-                new Item("halo", "sagsagasagsags", Item.Day.MONDAY),
-                new Item("alo", "xxxxxxxxxxxxxxxxxxxxx", Item.Day.MONDAY),
-                new Item("olo", "asdsdax", Item.Day.FRIDAY),
-                new Item("kolo", "yyyyyyyyyyyyy", Item.Day.SATURDAY),
-                new Item("dsaas", "aaaaaaaaaaaaaa", Item.Day.SUNDAY),
-                new Item("halo", "sagsagasagsags", Item.Day.MONDAY),
-                new Item("alo", "xxxxxxxxxxxxxxxxxxxxx", Item.Day.MONDAY),
-                new Item("olo", "asdsdax", Item.Day.FRIDAY),
-                new Item("kolo", "yyyyyyyyyyyyy", Item.Day.SATURDAY),
-                new Item("dsaas", "aaaaaaaaaaaaaa", Item.Day.SUNDAY),
-                new Item("halo", "sagsagasagsags", Item.Day.MONDAY),
-                new Item("alo", "xxxxxxxxxxxxxxxxxxxxx", Item.Day.MONDAY),
-                new Item("olo", "asdsdax", Item.Day.FRIDAY),
-                new Item("kolo", "yyyyyyyyyyyyy", Item.Day.SATURDAY),
-                new Item("dsaas", "aaaaaaaaaaaaaa", Item.Day.SUNDAY)
-        ));
+        XmlParser xmlParser = new XmlParser();
+        items = FXCollections.observableArrayList(xmlParser.readFromXmlFile());
+//                new Item("halo", "sagsagasagsags", Item.Day.MONDAY),
+//                new Item("alo", "xxxxxxxxxxxxxxxxxxxxx", Item.Day.MONDAY),
+//                new Item("olo", "asdsdax", Item.Day.FRIDAY),
+//                new Item("kolo", "yyyyyyyyyyyyy", Item.Day.SATURDAY),
+//                new Item("dsaas", "aaaaaaaaaaaaaa", Item.Day.SUNDAY),
+//                new Item("halo", "sagsagasagsags", Item.Day.MONDAY),
+//                new Item("alo", "xxxxxxxxxxxxxxxxxxxxx", Item.Day.MONDAY),
+//                new Item("olo", "asdsdax", Item.Day.FRIDAY),
+//                new Item("kolo", "yyyyyyyyyyyyy", Item.Day.SATURDAY),
+//                new Item("dsaas", "aaaaaaaaaaaaaa", Item.Day.SUNDAY),
+//                new Item("halo", "sagsagasagsags", Item.Day.MONDAY),
+//                new Item("alo", "xxxxxxxxxxxxxxxxxxxxx", Item.Day.MONDAY),
+//                new Item("olo", "asdsdax", Item.Day.FRIDAY),
+//                new Item("kolo", "yyyyyyyyyyyyy", Item.Day.SATURDAY),
+//                new Item("dsaas", "aaaaaaaaaaaaaa", Item.Day.SUNDAY)
+//        ));
     }
 
     private ItemDao() {}
@@ -36,9 +36,6 @@ public class ItemDao {
         return instance;
     }
 
-    public ObservableList<Item> getItems() {
-        return items;
-    }
     public ObservableList<Item> getItems(Item.Day day) {
         return items.filtered(item -> item.getDay().equals(day));
     }
