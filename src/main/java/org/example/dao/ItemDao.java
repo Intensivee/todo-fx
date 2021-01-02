@@ -7,27 +7,12 @@ import org.example.util.XmlParser;
 
 public class ItemDao {
     private static final ItemDao instance = new ItemDao();
-    private static ObservableList<Item> items;
+    private static final XmlParser xmlParser;
+    private static final ObservableList<Item> items;
 
     static {
-        XmlParser xmlParser = new XmlParser();
+        xmlParser = new XmlParser();
         items = FXCollections.observableArrayList(xmlParser.readFromXmlFile());
-//                new Item("halo", "sagsagasagsags", Item.Day.MONDAY),
-//                new Item("alo", "xxxxxxxxxxxxxxxxxxxxx", Item.Day.MONDAY),
-//                new Item("olo", "asdsdax", Item.Day.FRIDAY),
-//                new Item("kolo", "yyyyyyyyyyyyy", Item.Day.SATURDAY),
-//                new Item("dsaas", "aaaaaaaaaaaaaa", Item.Day.SUNDAY),
-//                new Item("halo", "sagsagasagsags", Item.Day.MONDAY),
-//                new Item("alo", "xxxxxxxxxxxxxxxxxxxxx", Item.Day.MONDAY),
-//                new Item("olo", "asdsdax", Item.Day.FRIDAY),
-//                new Item("kolo", "yyyyyyyyyyyyy", Item.Day.SATURDAY),
-//                new Item("dsaas", "aaaaaaaaaaaaaa", Item.Day.SUNDAY),
-//                new Item("halo", "sagsagasagsags", Item.Day.MONDAY),
-//                new Item("alo", "xxxxxxxxxxxxxxxxxxxxx", Item.Day.MONDAY),
-//                new Item("olo", "asdsdax", Item.Day.FRIDAY),
-//                new Item("kolo", "yyyyyyyyyyyyy", Item.Day.SATURDAY),
-//                new Item("dsaas", "aaaaaaaaaaaaaa", Item.Day.SUNDAY)
-//        ));
     }
 
     private ItemDao() {}
@@ -42,6 +27,7 @@ public class ItemDao {
 
     public void deleteItem(Item item){
         items.remove(item);
+        xmlParser.writeToXmlFile(items);
     }
 
     public Item addItem(Item item){
@@ -51,11 +37,13 @@ public class ItemDao {
             }
         }
         items.add(item);
+
+        xmlParser.writeToXmlFile(items);
         return item;
     }
 
     public Item editItem(Item itemToEdit, String heading, String note, Item.Day day) {
-        return items.stream().
+        Item editedItem = items.stream().
                 filter(itemToEdit::equals)
                 .peek(item -> {
                     item.setHeading(heading);
@@ -64,5 +52,12 @@ public class ItemDao {
                 })
                 .findFirst()
                 .orElseThrow(RuntimeException::new);
+
+        xmlParser.writeToXmlFile(items);
+        return editedItem;
+    }
+
+    public void saveItems() {
+        xmlParser.writeToXmlFile(items);
     }
 }

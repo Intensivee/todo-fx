@@ -35,7 +35,6 @@ public class XmlParser {
             XmlMapper mapper = new XmlMapper();
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
             mapper.writeValue(new File("items.xml"), items);
-
         }
         catch (IOException e){
             e.printStackTrace();

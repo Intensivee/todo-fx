@@ -84,7 +84,7 @@ public class ListController {
         itemListView.setItems(ItemDao.getInstance().getItems(selectedDay));
         itemTextArea.setText("");
         itemListView.getSelectionModel().select(null);
-        boolean isLimit = itemListView.getItems().stream().count() == Constants.MAX_DAY_NOTES;
+        boolean isLimit = (long) itemListView.getItems().size() == Constants.MAX_DAY_NOTES;
         addItemButton.setDisable(isLimit);
     }
 
@@ -94,8 +94,8 @@ public class ListController {
         alert.setTitle("Usuń " + item.getHeading());
         alert.setHeaderText(null);
         alert.setContentText("Czy napewno chcesz usunąć: " + item.getHeading() + "?");
+        alert.getDialogPane().setPrefSize(300, 40);
         Optional<ButtonType> action = alert.showAndWait();
-        System.out.println(item);
         if(action.isPresent() && action.get() == ButtonType.OK){
             ItemDao.getInstance().deleteItem(item);
             this.dayChangeEventHandler();
@@ -108,6 +108,7 @@ public class ListController {
         dialog.setTitle("Edycja notatki");
         dialog.initOwner(mainBorderPane.getScene().getWindow());
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        dialog.getDialogPane().setPrefSize(600, 300);
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("itemDialog.fxml"));
 
         try {
@@ -136,6 +137,7 @@ public class ListController {
         dialog.setTitle("Nowa notatka");
         dialog.initOwner(mainBorderPane.getScene().getWindow());
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        dialog.getDialogPane().setPrefSize(600, 300);
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("itemDialog.fxml"));
 
         try {
