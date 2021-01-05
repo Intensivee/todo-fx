@@ -56,8 +56,4 @@ public class ItemDao {
         xmlParser.writeToXmlFile(items);
         return editedItem;
     }
-
-    public void saveItems() {
-        xmlParser.writeToXmlFile(items);
-    }
 }

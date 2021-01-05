@@ -22,8 +22,8 @@ public class ItemController {
     private Item passedItem;
 
     public void initialize(){
-        dayComboBox.setItems(FXCollections.observableArrayList(Item.Day.MONDAY,Item.Day.TUESDAY, Item.Day.WEDNESDAY,
-                Item.Day.THURSDAY, Item.Day.FRIDAY, Item.Day.SATURDAY, Item.Day.SUNDAY));
+        dayComboBox.setItems(FXCollections.observableArrayList(Item.Day.Monday,Item.Day.Tuesday, Item.Day.Wednesday,
+                Item.Day.Thursday, Item.Day.Friday, Item.Day.Saturday, Item.Day.Sunday));
         this.setTextLimiter();
     }
 

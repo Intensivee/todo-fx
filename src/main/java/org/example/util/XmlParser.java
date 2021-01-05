@@ -12,12 +12,13 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class XmlParser {
+
+    public static final String FILE_NAME = "items.xml";
 
     public List<Item> readFromXmlFile() {
 
-        try(InputStream inputStream = new FileInputStream(new File("items.xml"))){
+        try(InputStream inputStream = new FileInputStream(FILE_NAME)){
 
             XmlMapper mapper = new XmlMapper();
             TypeReference<List<Item>> typeReference = new TypeReference<>() {};
@@ -34,7 +35,7 @@ public class XmlParser {
         try {
             XmlMapper mapper = new XmlMapper();
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
-            mapper.writeValue(new File("items.xml"), items);
+            mapper.writeValue(new File(FILE_NAME), items);
         }
         catch (IOException e){
             e.printStackTrace();

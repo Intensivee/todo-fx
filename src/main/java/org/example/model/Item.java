@@ -8,13 +8,13 @@ public class Item {
     private Day day;
 
     public enum Day {
-        MONDAY(Constants.MONDAY),
-        TUESDAY(Constants.TUESDAY),
-        WEDNESDAY(Constants.WEDNESDAY),
-        THURSDAY(Constants.THURSDAY),
-        FRIDAY(Constants.FRIDAY),
-        SATURDAY(Constants.SATURDAY),
-         SUNDAY(Constants.SUNDAY);
+        Monday(Constants.MONDAY),
+        Tuesday(Constants.TUESDAY),
+        Wednesday(Constants.WEDNESDAY),
+        Thursday(Constants.THURSDAY),
+        Friday(Constants.FRIDAY),
+        Saturday(Constants.SATURDAY),
+         Sunday(Constants.SUNDAY);
 
         public final String label;
         Day(String label){
@@ -34,11 +34,6 @@ public class Item {
         this.heading = heading;
         this.note = note;
         this.day = day;
-    }
-
-    public Item(String heading, String note) {
-        this.heading = heading;
-        this.note = note;
     }
 
     public String getHeading() {

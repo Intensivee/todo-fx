@@ -10,11 +10,9 @@ import java.io.IOException;
 
 public class App extends Application {
 
-    private static Scene scene;
-
     @Override
     public void start(Stage primaryStage) throws IOException {
-            Parent root = FXMLLoader.load(App.class.getResource("itemList.fxml"));
+            Parent root = FXMLLoader.load(App.class.getResource("ItemListDialogWindow.fxml"));
             primaryStage.setTitle("Todo list");
             primaryStage.setScene(new Scene(root, 500, 300));
             primaryStage.setResizable(false);

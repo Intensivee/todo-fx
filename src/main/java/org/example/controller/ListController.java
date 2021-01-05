@@ -29,9 +29,9 @@ public class ListController {
 
     public void initialize() {
         configureList(itemListView);
-        dayComboBox.setItems(FXCollections.observableArrayList(Item.Day.MONDAY,Item.Day.TUESDAY, Item.Day.WEDNESDAY,
-                Item.Day.THURSDAY, Item.Day.FRIDAY, Item.Day.SATURDAY, Item.Day.SUNDAY));
-        dayComboBox.getSelectionModel().select(Item.Day.MONDAY);
+        dayComboBox.setItems(FXCollections.observableArrayList(Item.Day.Monday,Item.Day.Tuesday, Item.Day.Wednesday,
+                Item.Day.Thursday, Item.Day.Friday, Item.Day.Saturday, Item.Day.Sunday));
+        dayComboBox.getSelectionModel().select(Item.Day.Monday);
         this.dayChangeEventHandler();
     }
 
@@ -52,8 +52,8 @@ public class ListController {
         listView.setCellFactory(lv -> {
             MenuItem editItem = new MenuItem("Edytuj");
             MenuItem deleteItem = new MenuItem("Usuń");
-            editItem.setOnAction(event -> editDialog(listView.getSelectionModel().getSelectedItem()));
-            deleteItem.setOnAction(event -> deleteDialog(listView.getSelectionModel().getSelectedItem()));
+            editItem.setOnAction(event -> itemEditDialog(listView.getSelectionModel().getSelectedItem()));
+            deleteItem.setOnAction(event -> itemDeleteDialog(listView.getSelectionModel().getSelectedItem()));
             ContextMenu contextMenu = new ContextMenu(editItem, deleteItem);
 
             ListCell<Item> cell = new ListCell<>(){
@@ -89,7 +89,7 @@ public class ListController {
     }
 
     @FXML
-    public void deleteDialog(Item item){
+    public void itemDeleteDialog(Item item){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Usuń " + item.getHeading());
         alert.setHeaderText(null);
@@ -103,13 +103,13 @@ public class ListController {
     }
 
     @FXML
-    public void editDialog(Item item) {
+    public void itemEditDialog(Item item) {
         Dialog<ButtonType> dialog  = new Dialog();
         dialog.setTitle("Edycja notatki");
         dialog.initOwner(mainBorderPane.getScene().getWindow());
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
         dialog.getDialogPane().setPrefSize(600, 300);
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("itemDialog.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("itemDialogWindow.fxml"));
 
         try {
             dialog.getDialogPane().setContent(fxmlLoader.load());
@@ -132,13 +132,13 @@ public class ListController {
     }
 
     @FXML
-    public void createDialog() {
+    public void itemCreateDialog() {
         Dialog<ButtonType> dialog  = new Dialog();
         dialog.setTitle("Nowa notatka");
         dialog.initOwner(mainBorderPane.getScene().getWindow());
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
         dialog.getDialogPane().setPrefSize(600, 300);
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("itemDialog.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("itemDialogWindow.fxml"));
 
         try {
             dialog.getDialogPane().setContent(fxmlLoader.load());

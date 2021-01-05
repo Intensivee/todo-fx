@@ -12,6 +12,5 @@ public final class Constants {
     public static final int ITEM_NOTE_LENGTH = 350;
     public static final int MAX_DAY_NOTES = 6;
 
-
     private Constants() {}
 }
