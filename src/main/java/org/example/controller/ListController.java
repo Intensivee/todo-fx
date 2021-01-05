@@ -32,7 +32,7 @@ public class ListController {
         dayComboBox.setItems(FXCollections.observableArrayList(Item.Day.Monday,Item.Day.Tuesday, Item.Day.Wednesday,
                 Item.Day.Thursday, Item.Day.Friday, Item.Day.Saturday, Item.Day.Sunday));
         dayComboBox.getSelectionModel().select(Item.Day.Monday);
-        this.dayChangeEventHandler();
+        this.dayChangeHandler();
     }
 
 
@@ -79,7 +79,7 @@ public class ListController {
         });
     }
 
-    public void dayChangeEventHandler(){
+    public void dayChangeHandler(){
         Item.Day selectedDay = dayComboBox.getSelectionModel().getSelectedItem();
         itemListView.setItems(ItemDao.getInstance().getItems(selectedDay));
         itemTextArea.setText("");
@@ -98,7 +98,7 @@ public class ListController {
         Optional<ButtonType> action = alert.showAndWait();
         if(action.isPresent() && action.get() == ButtonType.OK){
             ItemDao.getInstance().deleteItem(item);
-            this.dayChangeEventHandler();
+            this.dayChangeHandler();
         }
     }
 
@@ -125,7 +125,7 @@ public class ListController {
         if(response.isPresent() && response.get() == ButtonType.OK){
             Item editedItem = itemController.editItem();
             dayComboBox.getSelectionModel().select(editedItem.getDay());
-            this.dayChangeEventHandler();
+            this.dayChangeHandler();
             itemListView.refresh();
             itemListView.getSelectionModel().select(editedItem);
         }
@@ -144,7 +144,6 @@ public class ListController {
             dialog.getDialogPane().setContent(fxmlLoader.load());
         } catch (IOException e){
             System.out.println("couldn't load the dialog");
-            e.fillInStackTrace();
             return;
         }
         ItemController itemController = fxmlLoader.getController();
@@ -155,7 +154,7 @@ public class ListController {
         if(response.isPresent() && response.get() == ButtonType.OK){
           Item item = itemController.createItem();
           dayComboBox.getSelectionModel().select(item.getDay());
-          this.dayChangeEventHandler();
+          this.dayChangeHandler();
           itemListView.getSelectionModel().select(item);
         }
     }

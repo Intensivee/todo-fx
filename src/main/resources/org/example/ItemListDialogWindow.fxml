@@ -7,7 +7,7 @@
     <left>
         <GridPane hgap="1">
             <Button fx:id="addItemButton" text="Nowa notatka" GridPane.rowIndex="0" GridPane.columnIndex="0" onAction="#itemCreateDialog"/>
-            <ComboBox fx:id="dayComboBox" GridPane.rowIndex="0" GridPane.columnIndex="1" onAction="#dayChangeEventHandler" />
+            <ComboBox fx:id="dayComboBox" GridPane.rowIndex="0" GridPane.columnIndex="1" onAction="#dayChangeHandler" />
             <ListView fx:id="itemListView" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.columnIndex="0" />
         </GridPane>
     </left>
