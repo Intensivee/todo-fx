@@ -8,12 +8,12 @@ import javafx.scene.layout.BorderPane;
 import org.example.App;
 import org.example.dao.ItemDao;
 import org.example.model.Item;
-import org.example.util.Constants;
 
 import java.io.IOException;
 import java.util.Optional;
 
 public class ListController {
+    public static final int MAX_DAY_NOTES = 6;
 
     @FXML
     private BorderPane mainBorderPane;
@@ -29,9 +29,9 @@ public class ListController {
 
     public void initialize() {
         configureList(itemListView);
-        dayComboBox.setItems(FXCollections.observableArrayList(Item.Day.Monday,Item.Day.Tuesday, Item.Day.Wednesday,
-                Item.Day.Thursday, Item.Day.Friday, Item.Day.Saturday, Item.Day.Sunday));
-        dayComboBox.getSelectionModel().select(Item.Day.Monday);
+        dayComboBox.setItems(FXCollections.observableArrayList(Item.Day.MONDAY,Item.Day.TUESDAY, Item.Day.WEDNESDAY,
+                Item.Day.THURSDAY, Item.Day.FRIDAY, Item.Day.SATURDAY, Item.Day.SUNDAY));
+        dayComboBox.getSelectionModel().select(Item.Day.MONDAY);
         this.dayChangeHandler();
     }
 
@@ -84,7 +84,7 @@ public class ListController {
         itemListView.setItems(ItemDao.getInstance().getItems(selectedDay));
         itemTextArea.setText("");
         itemListView.getSelectionModel().select(null);
-        boolean isLimit = (long) itemListView.getItems().size() == Constants.MAX_DAY_NOTES;
+        boolean isLimit = (long) itemListView.getItems().size() == MAX_DAY_NOTES;
         addItemButton.setDisable(isLimit);
     }
 

@@ -1,20 +1,26 @@
 package org.example.model;
 
-import org.example.util.Constants;
-
 public class Item {
+    public static final String MONDAY = "Poniedziałek";
+    public static final String TUESDAY = "Wtorek";
+    public static final String WEDNESDAY = "Środa";
+    public static final String THURSDAY = "Czwartek";
+    public static final String FRIDAY = "Piątek";
+    public static final String SATURDAY = "Sobota";
+    public static final String SUNDAY = "Niedziela";
+
     private String heading;
     private String note;
     private Day day;
 
     public enum Day {
-        Monday(Constants.MONDAY),
-        Tuesday(Constants.TUESDAY),
-        Wednesday(Constants.WEDNESDAY),
-        Thursday(Constants.THURSDAY),
-        Friday(Constants.FRIDAY),
-        Saturday(Constants.SATURDAY),
-         Sunday(Constants.SUNDAY);
+        MONDAY(Item.MONDAY),
+        TUESDAY(Item.TUESDAY),
+        WEDNESDAY(Item.WEDNESDAY),
+        THURSDAY(Item.THURSDAY),
+        FRIDAY(Item.FRIDAY),
+        SATURDAY(Item.SATURDAY),
+         SUNDAY(Item.SUNDAY);
 
         public final String label;
         Day(String label){

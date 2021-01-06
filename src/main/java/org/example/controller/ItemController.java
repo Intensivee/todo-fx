@@ -9,9 +9,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.example.dao.ItemDao;
 import org.example.model.Item;
-import org.example.util.Constants;
 
 public class ItemController {
+
+    public static final int ITEM_HEADING_LENGTH = 30;
+    public static final int ITEM_NOTE_LENGTH = 350;
 
     @FXML
     private TextField headingTextField;
@@ -22,22 +24,22 @@ public class ItemController {
     private Item passedItem;
 
     public void initialize(){
-        dayComboBox.setItems(FXCollections.observableArrayList(Item.Day.Monday,Item.Day.Tuesday, Item.Day.Wednesday,
-                Item.Day.Thursday, Item.Day.Friday, Item.Day.Saturday, Item.Day.Sunday));
+        dayComboBox.setItems(FXCollections.observableArrayList(Item.Day.MONDAY,Item.Day.TUESDAY, Item.Day.WEDNESDAY,
+                Item.Day.THURSDAY, Item.Day.FRIDAY, Item.Day.SATURDAY, Item.Day.SUNDAY));
         this.setTextLimiter();
     }
 
     public void setTextLimiter(){
 
         headingTextField.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            if(newValue != null && headingTextField.getText().length() > Constants.ITEM_HEADING_LENGTH) {
-                headingTextField.setText(headingTextField.getText().substring(0, Constants.ITEM_HEADING_LENGTH));
+            if(newValue != null && headingTextField.getText().length() > ITEM_HEADING_LENGTH) {
+                headingTextField.setText(headingTextField.getText().substring(0, ITEM_HEADING_LENGTH));
             }
         });
 
         noteTextArea.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            if(newValue != null && noteTextArea.getText().length() > Constants.ITEM_NOTE_LENGTH) {
-                noteTextArea.setText(noteTextArea.getText().substring(0, Constants.ITEM_NOTE_LENGTH));
+            if(newValue != null && noteTextArea.getText().length() > ITEM_NOTE_LENGTH) {
+                noteTextArea.setText(noteTextArea.getText().substring(0, ITEM_NOTE_LENGTH));
             }
         });
     }
