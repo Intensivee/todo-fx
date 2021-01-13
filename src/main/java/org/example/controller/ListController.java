@@ -14,6 +14,10 @@ import java.util.Optional;
 
 public class ListController {
     public static final int MAX_DAY_NOTES = 6;
+    public static final String MENU_ITEM_EDIT = "Edytuj";
+    public static final String MENU_ITEM_DELETE = "Usuń";
+    public static final String EDIT_ITEM_DIALOG_TITLE= "Edycja notatki";
+    public static final String CREATE_ITEM_DIALOG_TITLE= "Nowa notatka";
 
     @FXML
     private BorderPane mainBorderPane;
@@ -50,8 +54,8 @@ public class ListController {
 
         // add context menu to each item in list
         listView.setCellFactory(lv -> {
-            MenuItem editItem = new MenuItem("Edytuj");
-            MenuItem deleteItem = new MenuItem("Usuń");
+            MenuItem editItem = new MenuItem(MENU_ITEM_EDIT);
+            MenuItem deleteItem = new MenuItem(MENU_ITEM_DELETE);
             editItem.setOnAction(event -> itemEditDialog(listView.getSelectionModel().getSelectedItem()));
             deleteItem.setOnAction(event -> itemDeleteDialog(listView.getSelectionModel().getSelectedItem()));
             ContextMenu contextMenu = new ContextMenu(editItem, deleteItem);
@@ -91,8 +95,9 @@ public class ListController {
     @FXML
     public void itemDeleteDialog(Item item){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Usuń " + item.getHeading());
+        alert.setTitle(MENU_ITEM_DELETE + " " + item.getHeading());
         alert.setHeaderText(null);
+        alert.initOwner(mainBorderPane.getScene().getWindow());
         alert.setContentText("Czy napewno chcesz usunąć: " + item.getHeading() + "?");
         alert.getDialogPane().setPrefSize(300, 40);
         Optional<ButtonType> action = alert.showAndWait();
@@ -105,7 +110,7 @@ public class ListController {
     @FXML
     public void itemEditDialog(Item item) {
         Dialog<ButtonType> dialog  = new Dialog();
-        dialog.setTitle("Edycja notatki");
+        dialog.setTitle(EDIT_ITEM_DIALOG_TITLE);
         dialog.initOwner(mainBorderPane.getScene().getWindow());
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
         dialog.getDialogPane().setPrefSize(600, 300);
@@ -134,7 +139,7 @@ public class ListController {
     @FXML
     public void itemCreateDialog() {
         Dialog<ButtonType> dialog  = new Dialog();
-        dialog.setTitle("Nowa notatka");
+        dialog.setTitle(CREATE_ITEM_DIALOG_TITLE);
         dialog.initOwner(mainBorderPane.getScene().getWindow());
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
         dialog.getDialogPane().setPrefSize(600, 300);
