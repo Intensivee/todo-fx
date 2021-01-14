@@ -162,7 +162,12 @@ public class ListController {
         try {
             dialog.getDialogPane().setContent(fxmlLoader.load());
         } catch (IOException e){
-            System.out.println("couldn't load the dialog");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Błąd");
+            alert.setHeaderText(null);
+            alert.setContentText("Wczytanie okna dialogowego nie powiodło się.");
+            alert.showAndWait();
+
             Platform.exit();
             System.exit(0);
         }
