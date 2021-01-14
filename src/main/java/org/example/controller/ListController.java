@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -124,7 +125,9 @@ public class ListController {
         try {
             dialog.getDialogPane().setContent(fxmlLoader.load());
         } catch (IOException e){
-            e.fillInStackTrace();
+            System.out.println("couldn't load the dialog");
+            Platform.exit();
+            System.exit(0);
         }
         ItemController itemController = fxmlLoader.getController();
         itemController.setFields(itemListView.getSelectionModel().getSelectedItem());
@@ -154,7 +157,8 @@ public class ListController {
             dialog.getDialogPane().setContent(fxmlLoader.load());
         } catch (IOException e){
             System.out.println("couldn't load the dialog");
-            return;
+            Platform.exit();
+            System.exit(0);
         }
         ItemController itemController = fxmlLoader.getController();
         itemController.setFields(new Item("", "", dayComboBox.getValue()));
