@@ -8,6 +8,7 @@ import org.example.util.XmlParser;
 import java.util.List;
 
 public class ItemDao {
+
     private static final ItemDao instance = new ItemDao();
     private static final XmlParser xmlParser;
     private static ObservableList<Item> items;

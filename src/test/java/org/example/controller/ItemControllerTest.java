@@ -25,11 +25,10 @@ import java.util.concurrent.TimeoutException;
 @ExtendWith(ApplicationExtension.class)
 class ItemControllerTest {
 
-    final String HEADING_TEXT_FIELD = "#headingTextField";
-    final String NOTE_TEXT_AREA = "#noteTextArea";
-    final String DAY_COMBO_BOX = "#dayComboBox";
-    final String ADD_ITEM_BUTTON = "#addItemButton";
-    final String OK_BUTTON = "OK";
+    private final String HEADING_TEXT_FIELD = "#headingTextField";
+    private final String NOTE_TEXT_AREA = "#noteTextArea";
+    private final String DAY_COMBO_BOX = "#dayComboBox";
+    private final String OK_BUTTON = "OK";
 
     @Start
     public void start(Stage stage) throws Exception {
@@ -39,7 +38,7 @@ class ItemControllerTest {
 
     @BeforeEach
     void beforeEach(FxRobot robot) {
-        robot.clickOn(ADD_ITEM_BUTTON);
+        robot.clickOn("#addItemButton");
     }
 
     @AfterEach
@@ -49,7 +48,7 @@ class ItemControllerTest {
 
     @Test
     void dayComboBoxHasAllDays(FxRobot robot){
-        ComboBox<Item.Day> comboBox = robot.lookup(DAY_COMBO_BOX).queryAs(ComboBox.class);
+        ComboBox<Item.Day> comboBox = robot.lookup(DAY_COMBO_BOX).queryComboBox();
         ObservableList<Item.Day> days = comboBox.getItems();
 
         for(Item.Day expectedDay : Item.Day.values()) {
@@ -59,7 +58,7 @@ class ItemControllerTest {
 
     @Test
     void dayComboBoxSelectsProperDefaultDay(FxRobot robot) {
-        ComboBox<Item.Day> comboBox = robot.lookup(DAY_COMBO_BOX).queryAs(ComboBox.class);
+        ComboBox<Item.Day> comboBox = robot.lookup(DAY_COMBO_BOX).queryComboBox();
 
         Assertions.assertEquals(Item.Day.MONDAY, comboBox.getSelectionModel().getSelectedItem());
     }

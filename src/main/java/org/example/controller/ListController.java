@@ -14,29 +14,26 @@ import java.util.Optional;
 
 public class ListController {
 
-    public static final int MAX_DAY_NOTES = 6;
-
-    public static final int ITEM_DIALOG_WINDOW_PX_X_SIZE = 600;
-    public static final int ITEM_DIALOG_WINDOW_PX_Y_SIZE = 300;
-
-    public static final String MENU_ITEM_EDIT = "Edytuj";
-    public static final String MENU_ITEM_DELETE = "Usuń";
-    public static final String EDIT_ITEM_DIALOG_TITLE= "Edycja notatki";
-    public static final String CREATE_ITEM_DIALOG_TITLE= "Nowa notatka";
-
-
-
     @FXML
     private BorderPane mainBorderPane;
     @FXML
     private Button addItemButton;
     @FXML
+    private ComboBox<Item.Day> dayComboBox;
+    @FXML
     private ListView<Item> itemListView;
     @FXML
     private TextArea itemTextArea;
-    @FXML
-    private ComboBox<Item.Day> dayComboBox;
 
+
+    public static final int MAX_DAY_NOTES = 6;
+    public static final int ITEM_DIALOG_WINDOW_PX_X_SIZE = 600;
+    public static final int ITEM_DIALOG_WINDOW_PX_Y_SIZE = 300;
+    public static final String MENU_ITEM_EDIT = "Edytuj";
+    public static final String MENU_ITEM_DELETE = "Usuń";
+    public static final String EDIT_ITEM_DIALOG_TITLE= "Edycja notatki";
+    public static final String CREATE_ITEM_DIALOG_TITLE= "Nowa notatka";
+    public static final String ITEM_DIALOG_WINDOW= "itemDialogWindow.fxml";
 
     public void initialize() {
         configureList(itemListView);
@@ -48,9 +45,6 @@ public class ListController {
 
 
     public void configureList(ListView<Item> listView){
-        if(listView == null){
-            throw new RuntimeException();
-        }
         // show details after selecting heading
         listView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldItem, newItem) -> {
             if (newItem != null) {
@@ -120,12 +114,12 @@ public class ListController {
 
     @FXML
     public void itemEditDialog(Item item) {
-        Dialog<ButtonType> dialog  = new Dialog();
+        Dialog<ButtonType> dialog  = new Dialog<>();
         dialog.setTitle(EDIT_ITEM_DIALOG_TITLE);
         dialog.initOwner(mainBorderPane.getScene().getWindow());
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
         dialog.getDialogPane().setPrefSize(ITEM_DIALOG_WINDOW_PX_X_SIZE, ITEM_DIALOG_WINDOW_PX_Y_SIZE);
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("itemDialogWindow.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(ITEM_DIALOG_WINDOW));
 
         try {
             dialog.getDialogPane().setContent(fxmlLoader.load());
@@ -149,12 +143,12 @@ public class ListController {
 
     @FXML
     public void itemCreateDialog() {
-        Dialog<ButtonType> dialog  = new Dialog();
+        Dialog<ButtonType> dialog  = new Dialog<>();
         dialog.setTitle(CREATE_ITEM_DIALOG_TITLE);
         dialog.initOwner(mainBorderPane.getScene().getWindow());
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
         dialog.getDialogPane().setPrefSize(ITEM_DIALOG_WINDOW_PX_X_SIZE, ITEM_DIALOG_WINDOW_PX_Y_SIZE);
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("itemDialogWindow.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(ITEM_DIALOG_WINDOW));
 
         try {
             dialog.getDialogPane().setContent(fxmlLoader.load());

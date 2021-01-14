@@ -1,6 +1,11 @@
 package org.example.model;
 
 public class Item {
+
+    private Day day;
+    private String heading;
+    private String note;
+
     public static final String MONDAY = "Poniedziałek";
     public static final String TUESDAY = "Wtorek";
     public static final String WEDNESDAY = "Środa";
@@ -8,10 +13,6 @@ public class Item {
     public static final String FRIDAY = "Piątek";
     public static final String SATURDAY = "Sobota";
     public static final String SUNDAY = "Niedziela";
-
-    private String heading;
-    private String note;
-    private Day day;
 
     public enum Day {
         MONDAY(Item.MONDAY),

@@ -3,13 +3,11 @@ package org.example.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ItemTest {
 
     private Item item;
-
-    String EXAMPLE_HEADING = "to string heading";
 
     @BeforeEach
     void setUp() {
@@ -18,11 +16,11 @@ class ItemTest {
 
     @Test
     void testToString() {
-        String expectedHeading = EXAMPLE_HEADING;
+        String EXAMPLE_HEADING = "to string heading";
 
         this.item.setHeading(EXAMPLE_HEADING);
 
-        assertEquals(expectedHeading, this.item.toString());
+        assertEquals(EXAMPLE_HEADING, this.item.toString());
     }
 
     @Test

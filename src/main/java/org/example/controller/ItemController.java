@@ -12,9 +12,6 @@ import org.example.model.Item;
 
 public class ItemController {
 
-    public static final int ITEM_HEADING_LENGTH = 30;
-    public static final int ITEM_NOTE_LENGTH = 350;
-
     @FXML
     private TextField headingTextField;
     @FXML
@@ -22,6 +19,10 @@ public class ItemController {
     @FXML
     private ComboBox<Item.Day> dayComboBox;
     private Item passedItem;
+
+
+    public static final int ITEM_HEADING_LENGTH = 30;
+    public static final int ITEM_NOTE_LENGTH = 350;
 
     public void initialize(){
         dayComboBox.setItems(FXCollections.observableArrayList(Item.Day.MONDAY,Item.Day.TUESDAY, Item.Day.WEDNESDAY,

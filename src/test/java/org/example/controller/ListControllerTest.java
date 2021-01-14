@@ -32,13 +32,12 @@ import java.util.concurrent.TimeoutException;
 @ExtendWith(ApplicationExtension.class)
 class ListControllerTest {
 
-    final String ITEM_LIST_VIEW = "#itemListView";
-    final String ITEM_TEXT_AREA = "#itemTextArea";
-    final String ADD_ITEM_BUTTON = "#addItemButton";
-    final String DAY_COMBO_BOX = "#dayComboBox";
+    private final String ITEM_TEXT_AREA = "#itemTextArea";
+    private final String ADD_ITEM_BUTTON = "#addItemButton";
+    private final String DAY_COMBO_BOX = "#dayComboBox";
 
-    final String EXAMPLE_HEADING = "heading_1";
-    final String EXAMPLE_NOTE = "note_1";
+    private final String EXAMPLE_HEADING = "heading_1";
+    private final String EXAMPLE_NOTE = "note_1";
 
     @Start
     public void start(Stage stage) throws Exception {
@@ -49,7 +48,7 @@ class ListControllerTest {
     @BeforeEach
     void beforeEach(FxRobot robot){
         Platform.runLater( () -> {
-            ListView<Item> itemListView = (ListView<Item>) robot.lookup(ITEM_LIST_VIEW).query();
+            ListView<Item> itemListView = robot.lookup("#itemListView").queryListView();
             itemListView.setItems(FXCollections.observableArrayList(new Item(EXAMPLE_HEADING, EXAMPLE_NOTE, Item.Day.MONDAY)));
         });
         WaitForAsyncUtils.waitForFxEvents();
@@ -127,7 +126,7 @@ class ListControllerTest {
 
     @Test
     void dayComboBoxLoadsDaysProperly(FxRobot robot){
-        ComboBox<Item.Day> comboBox = robot.lookup(DAY_COMBO_BOX).queryAs(ComboBox.class);
+        ComboBox<Item.Day> comboBox = robot.lookup(DAY_COMBO_BOX).queryComboBox();
         ObservableList<Item.Day> days = comboBox.getItems();
 
         for(Item.Day expectedDay : Item.Day.values()) {
