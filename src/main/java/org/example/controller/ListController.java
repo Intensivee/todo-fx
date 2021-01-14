@@ -115,20 +115,9 @@ public class ListController {
 
     @FXML
     public void itemEditDialog(Item item) {
-        Dialog<ButtonType> dialog  = new Dialog<>();
-        dialog.setTitle(EDIT_ITEM_DIALOG_TITLE);
-        dialog.initOwner(mainBorderPane.getScene().getWindow());
-        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-        dialog.getDialogPane().setPrefSize(ITEM_DIALOG_WINDOW_PX_X_SIZE, ITEM_DIALOG_WINDOW_PX_Y_SIZE);
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(ITEM_DIALOG_WINDOW));
+        Dialog<ButtonType> dialog = this.itemDialogCreator(EDIT_ITEM_DIALOG_TITLE, fxmlLoader);
 
-        try {
-            dialog.getDialogPane().setContent(fxmlLoader.load());
-        } catch (IOException e){
-            System.out.println("couldn't load the dialog");
-            Platform.exit();
-            System.exit(0);
-        }
         ItemController itemController = fxmlLoader.getController();
         itemController.setFields(itemListView.getSelectionModel().getSelectedItem());
         dialog.getDialogPane().lookupButton(ButtonType.OK).disableProperty().bind(itemController.emptyInput());
@@ -146,22 +135,12 @@ public class ListController {
 
     @FXML
     public void itemCreateDialog() {
-        Dialog<ButtonType> dialog  = new Dialog<>();
-        dialog.setTitle(CREATE_ITEM_DIALOG_TITLE);
-        dialog.initOwner(mainBorderPane.getScene().getWindow());
-        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-        dialog.getDialogPane().setPrefSize(ITEM_DIALOG_WINDOW_PX_X_SIZE, ITEM_DIALOG_WINDOW_PX_Y_SIZE);
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(ITEM_DIALOG_WINDOW));
+        Dialog<ButtonType> dialog = this.itemDialogCreator(CREATE_ITEM_DIALOG_TITLE, fxmlLoader);
 
-        try {
-            dialog.getDialogPane().setContent(fxmlLoader.load());
-        } catch (IOException e){
-            System.out.println("couldn't load the dialog");
-            Platform.exit();
-            System.exit(0);
-        }
         ItemController itemController = fxmlLoader.getController();
         itemController.setFields(new Item("", "", dayComboBox.getValue()));
+
         dialog.getDialogPane().lookupButton(ButtonType.OK).disableProperty().bind(itemController.emptyInput());
 
         Optional<ButtonType> response = dialog.showAndWait();
@@ -171,6 +150,24 @@ public class ListController {
           this.dayChangeHandler();
           itemListView.getSelectionModel().select(item);
         }
+    }
+
+    private Dialog<ButtonType> itemDialogCreator(String title, FXMLLoader fxmlLoader){
+        Dialog<ButtonType> dialog  = new Dialog<>();
+        dialog.setTitle(title);
+        dialog.initOwner(mainBorderPane.getScene().getWindow());
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        dialog.getDialogPane().setPrefSize(ITEM_DIALOG_WINDOW_PX_X_SIZE, ITEM_DIALOG_WINDOW_PX_Y_SIZE);
+
+        try {
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+        } catch (IOException e){
+            System.out.println("couldn't load the dialog");
+            Platform.exit();
+            System.exit(0);
+        }
+
+        return dialog;
     }
 
 }
