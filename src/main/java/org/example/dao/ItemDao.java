@@ -5,10 +5,12 @@ import javafx.collections.ObservableList;
 import org.example.model.Item;
 import org.example.util.XmlParser;
 
+import java.util.List;
+
 public class ItemDao {
     private static final ItemDao instance = new ItemDao();
     private static final XmlParser xmlParser;
-    private static final ObservableList<Item> items;
+    private static ObservableList<Item> items;
 
     static {
         xmlParser = new XmlParser();
@@ -40,6 +42,10 @@ public class ItemDao {
 
         xmlParser.writeToXmlFile(items);
         return item;
+    }
+
+    public static void setItems(List<Item> items){
+        ItemDao.items = FXCollections.observableArrayList(items);
     }
 
     public Item editItem(Item itemToEdit, String heading, String note, Item.Day day) {

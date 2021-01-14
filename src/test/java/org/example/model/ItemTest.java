@@ -9,6 +9,8 @@ class ItemTest {
 
     private Item item;
 
+    String EXAMPLE_HEADING = "to string heading";
+
     @BeforeEach
     void setUp() {
         this.item = new Item();
@@ -16,9 +18,9 @@ class ItemTest {
 
     @Test
     void testToString() {
-        String expectedHeading = "to string heading";
+        String expectedHeading = EXAMPLE_HEADING;
 
-        this.item.setHeading("to string heading");
+        this.item.setHeading(EXAMPLE_HEADING);
 
         assertEquals(expectedHeading, this.item.toString());
     }

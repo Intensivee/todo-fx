@@ -13,11 +13,18 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class ListController {
+
     public static final int MAX_DAY_NOTES = 6;
+
+    public static final int ITEM_DIALOG_WINDOW_PX_X_SIZE = 600;
+    public static final int ITEM_DIALOG_WINDOW_PX_Y_SIZE = 300;
+
     public static final String MENU_ITEM_EDIT = "Edytuj";
     public static final String MENU_ITEM_DELETE = "Usuń";
     public static final String EDIT_ITEM_DIALOG_TITLE= "Edycja notatki";
     public static final String CREATE_ITEM_DIALOG_TITLE= "Nowa notatka";
+
+
 
     @FXML
     private BorderPane mainBorderPane;
@@ -88,6 +95,10 @@ public class ListController {
         itemListView.setItems(ItemDao.getInstance().getItems(selectedDay));
         itemTextArea.setText("");
         itemListView.getSelectionModel().select(null);
+        this.itemListLimiter();
+    }
+
+    public void itemListLimiter() {
         boolean isLimit = (long) itemListView.getItems().size() == MAX_DAY_NOTES;
         addItemButton.setDisable(isLimit);
     }
@@ -113,7 +124,7 @@ public class ListController {
         dialog.setTitle(EDIT_ITEM_DIALOG_TITLE);
         dialog.initOwner(mainBorderPane.getScene().getWindow());
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-        dialog.getDialogPane().setPrefSize(600, 300);
+        dialog.getDialogPane().setPrefSize(ITEM_DIALOG_WINDOW_PX_X_SIZE, ITEM_DIALOG_WINDOW_PX_Y_SIZE);
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("itemDialogWindow.fxml"));
 
         try {
@@ -142,7 +153,7 @@ public class ListController {
         dialog.setTitle(CREATE_ITEM_DIALOG_TITLE);
         dialog.initOwner(mainBorderPane.getScene().getWindow());
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-        dialog.getDialogPane().setPrefSize(600, 300);
+        dialog.getDialogPane().setPrefSize(ITEM_DIALOG_WINDOW_PX_X_SIZE, ITEM_DIALOG_WINDOW_PX_Y_SIZE);
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("itemDialogWindow.fxml"));
 
         try {
