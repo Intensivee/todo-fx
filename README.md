@@ -1,4 +1,4 @@
-# todo-fx
+# weekly-todo
 The project is a simple GUI application built with maven, written using javaFx.
 It allows user to perform CRUD operations on note objects (heading, note, day).
 App is secured for inserting wrong data and tested with both junit5 and testFx.
